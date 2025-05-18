@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDxDAU Connections: Driving Change</title>
+    <style>
+        :root {
+            --tedx-red: #e62b1e;
+            --tedx-dark: #333333;
+            --yellow-category: #f9df6d;
+            --green-category: #a0c35a;
+            --blue-category: #718eff;
+            --purple-category: #b48ead;
+            --selected-bg: #e6e6e6;
+            --hover-bg: #f0f0f0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--tedx-dark);
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            color: var(--tedx-red);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+        
+        .instructions {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: var(--tedx-red);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .item:hover {
+            background-color: var(--hover-bg);
+            transform: translateY(-2px);
+        }
+        
+        .item.selected {
+            background-color: var(--selected-bg);
+            border: 2px solid var(--tedx-dark);
+            transform: scale(1.02);
+        }
+        
+        .item.solved {
+            cursor: default;
+            transform: none;
+        }
+        
+        .yellow-category {
+            background-color: var(--yellow-category);
+        }
+        
+        .green-category {
+            background-color: var(--green-category);
+        }
+        
+        .blue-category {
+            background-color: var(--blue-category);
+        }
+        
+        .purple-category {
+            background-color: var(--purple-category);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background-color: var(--tedx-red);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #c71f13;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        #hintButton {
+            background-color: var(--tedx-dark);
+        }
+        
+        #hintButton:hover {
+            background-color: #222;
+        }
+        
+        #feedback {
+            text-align: center;
+            margin-bottom: 20px;
+            min-height: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .solved-groups {
+            margin-top: 30px;
+        }
+        
+        .group {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .group-header {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .group-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .group-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .group-items {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .group-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .completion-message {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        
+        .completion-message h2 {
+            color: var(--tedx-red);
+            margin-bottom: 20px;
+        }
+        
+        .completion-message p {
+            margin-bottom: 20px;
+        }
+        
+        .btn-register {
+            display: inline-block;
+            background-color: var(--tedx-red);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-register:hover {
+            background-color: #c71f13;
+        }
+        
+        .speaker-link {
+            color: var(--tedx-red);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .speaker-link:hover {
+            text-decoration: underline;
+        }
+        
+        .hint-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .hint-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .hint-content {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TEDxDAU Connections: Driving Change</h1>
+        <h2>Discover the changemakers at TEDxDAU 2025</h2>
+    </header>
+    
+    <div class="instructions">
+        <h3>How to Play</h3>
+        <p>Group these clues into 4 categories of 4 related items each. Select four items and check your guess!</p>
+        <p>Some groups are easier to find than others. Keep trying until you've found all connections.</p>
+    </div>
+    
+    <div id="hintArea" class="hidden hint-box">
+        <h4>Hint</h4>
+        <p id="hintContent" class="hint-content"></p>
+    </div>
+    
+    <div id="gameGrid" class="grid">
+        <!-- Items will be populated by JavaScript -->
+    </div>
+    
+    <div id="feedback"></div>
+    
+    <div class="controls">
+        <button id="submitButton" disabled>Check Selection (0/4)</button>
+        <button id="hintButton">Get Hint</button>
+    </div>
+    
+    <div id="solvedGroups" class="solved-groups">
+        <!-- Solved groups will appear here -->
+    </div>
+    
+    <div id="completionMessage" class="completion-message hidden">
+        <h2>Congratulations!</h2>
+        <p>You've discovered how our TEDxDAU speakers are driving change across defense, technology, leadership, and education.</p>
+        <p>Join us at TEDxDAU 2025 to hear their inspiring stories and learn how you too can become a driver of change!</p>
+        <a href="#" class="btn-register" id="registerLink">Register for TEDxDAU 2025</a>
+    </div>
+
+    <script>
+        // Game data
+        const gameData = {
+            categories: [
+                {
+                    name: "INNOVATION PIONEERS",
+                    description: "Speakers driving technological change",
+                    color: "yellow-category",
+                    items: [
+                        {
+                            text: "Designed AI-powered learning experiences using game-based simulations",
+                            speaker: "Page Durham"
+                        },
+                        {
+                            text: "Created acquisition strategies for AI prototype delivery",
+                            speaker: "Bonnie Evangelista"
+                        },
+                        {
+                            text: "Oversees mechanical fabrication and R&D programs at a leading research lab",
+                            speaker: "Jim Blessé"
+                        },
+                        {
+                            text: "Manages technology integration for military information warfare",
+                            speaker: "MaryLou Moore"
+                        }
+                    ]
+                },
+                {
+                    name: "MISSION LEADERS",
+                    description: "Speakers in key leadership positions",
+                    color: "green-category",
+                    items: [
+                        {
+                            text: "Served as commanding officer of a Coast Guard air station",
+                            speaker: "Marcus Canady"
+                        },
+                        {
+                            text: "Led efforts to overhaul outdated government procurement models",
+                            speaker: "Bonnie Evangelista"
+                        },
+                        {
+                            text: "Managed Afghan relocation efforts through strategic acquisition contracts",
+                            speaker: "Mike Carroll"
+                        },
+                        {
+                            text: "Leads cybersecurity innovation within a national security training corps",
+                            speaker: "Faith Jones"
+                        }
+                    ]
+                },
+                {
+                    name: "EDUCATIONAL JOURNEYS",
+                    description: "Speakers with specialized educational backgrounds",
+                    color: "blue-category",
+                    items: [
+                        {
+                            text: "Earned advanced degrees in systems engineering, political science, and public policy",
+                            speaker: "Margaret Palmieri"
+                        },
+                        {
+                            text: "Currently pursuing multiple graduate certificates, including entrepreneurship and data engineering",
+                            speaker: "Ryan Hilger"
+                        },
+                        {
+                            text: "Served in both the classroom and the Pentagon, managing classified military correspondence",
+                            speaker: "Latanya Tidwell"
+                        },
+                        {
+                            text: "Built cross-service innovation networks in military acquisition",
+                            speaker: "Mike Carroll"
+                        }
+                    ]
+                },
+                {
+                    name: "TRANSFORMATION CHAMPIONS",
+                    description: "Speakers leading transformative initiatives",
+                    color: "purple-category",
+                    items: [
+                        {
+                            text: "Founded a leadership development company focused on \"intrusive leadership\"",
+                            speaker: "Marcus Canady"
+                        },
+                        {
+                            text: "Developed submarine-launched autonomous systems programs",
+                            speaker: "Ryan Hilger"
+                        },
+                        {
+                            text: "Supports transition of warfighting networks through data science and AI integration",
+                            speaker: "Margaret Palmieri"
+                        },
+                        {
+                            text: "Manages education of 87,000 Airmen in continuous improvement initiatives",
+                            speaker: "MaryLou Moore"
+                        }
+                    ]
+                }
+            ],
+            hints: [
+                "Look for speakers who have pioneered new technologies or innovative approaches.",
+                "Some speakers have held significant leadership positions in missions or organizations.",
+                "Several speakers have unique educational backgrounds or specialized training.",
+                "Some speakers have led initiatives that transformed their organizations or fields."
+            ]
+        };
+
+        // Game state
+        let gameState = {
+            selectedItems: [],
+            solvedCategories: [],
+            hintsUsed: 0,
+            maxHints: gameData.hints.length
+        };
+
+        // DOM Elements
+        const gameGrid = document.getElementById('gameGrid');
+        const submitButton = document.getElementById('submitButton');
+        const hintButton = document.getElementById('hintButton');
+        const feedbackElement = document.getElementById('feedback');
+        const solvedGroupsElement = document.getElementById('solvedGroups');
+        const completionMessage = document.getElementById('completionMessage');
+        const hintArea = document.getElementById('hintArea');
+        const hintContent = document.getElementById('hintContent');
+        const registerLink = document.getElementById('registerLink');
+
+        // Update the registration link - replace with your actual registration URL
+        registerLink.href = "https://www.dau.edu/tedxdau";
+        registerLink.textContent = "Register for TEDxDAU 2025: Driving Change";
+
+        // Initialize the game
+        function initGame() {
+            // Flatten all items into a single array
+            let allItems = [];
+            gameData.categories.forEach(category => {
+                category.items.forEach(item => {
+                    allItems.push({
+                        ...item,
+                        categoryName: category.name,
+                        categoryColor: category.color
+                    });
+                });
+            });
+            
+            // Shuffle the items
+            allItems = shuffleArray(allItems);
+            
+            // Create the grid items
+            allItems.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'item';
+                itemElement.textContent = item.text;
+                itemElement.dataset.index = index;
+                itemElement.dataset.category = item.categoryName;
+                itemElement.dataset.color = item.categoryColor;
+                itemElement.dataset.speaker = item.speaker;
+                
+                itemElement.addEventListener('click', () => handleItemClick(itemElement));
+                
+                gameGrid.appendChild(itemElement);
+            });
+            
+            // Add event listeners
+            submitButton.addEventListener('click', checkSelection);
+            hintButton.addEventListener('click', showHint);
+        }
+
+        // Handle clicking on an item
+        function handleItemClick(item) {
+            // Ignore clicks on solved items
+            if (item.classList.contains('solved')) {
+                return;
+            }
+            
+            // Toggle selection
+            if (item.classList.contains('selected')) {
+                item.classList.remove('selected');
+                gameState.selectedItems = gameState.selectedItems.filter(i => i !== item.dataset.index);
+            } else {
+                // Only allow selecting up to 4 items
+                if (gameState.selectedItems.length < 4) {
+                    item.classList.add('selected');
+                    gameState.selectedItems.push(item.dataset.index);
+                }
+            }
+            
+            // Update the submit button
+            updateSubmitButton();
+        }
+
+        // Update the submit button state
+        function updateSubmitButton() {
+            submitButton.disabled = gameState.selectedItems.length !== 4;
+            submitButton.textContent = `Check Selection (${gameState.selectedItems.length}/4)`;
+        }
+
+        // Check if the current selection forms a valid category
+        function checkSelection() {
+            // Get all selected items
+            const selectedElements = gameState.selectedItems.map(index => 
+                document.querySelector(`.item[data-index="${index}"]`)
+            );
+            
+            // Get the categories of selected items
+            const selectedCategories = selectedElements.map(el => el.dataset.category);
+            
+            // Check if all selected items belong to the same category
+            const allSameCategory = selectedCategories.every(cat => cat === selectedCategories[0]);
+            
+            // Check if this category has already been solved
+            const categoryAlreadySolved = gameState.solvedCategories.includes(selectedCategories[0]);
+            
+            if (allSameCategory && !categoryAlreadySolved) {
+                // Success! Mark as solved
+                const category = gameData.categories.find(cat => cat.name === selectedCategories[0]);
+                
+                // Mark items as solved
+                selectedElements.forEach(el => {
+                    el.classList.remove('selected');
+                    el.classList.add('solved');
+                    el.classList.add(el.dataset.color);
+                });
+                
+                // Add to solved categories
+                gameState.solvedCategories.push(selectedCategories[0]);
+                
+                // Display feedback
+                feedbackElement.textContent = `Great job! You found the "${selectedCategories[0]}" category.`;
+                feedbackElement.style.color = "#28a745";
+                
+                // Add to solved groups display
+                addSolvedGroup(category);
+                
+                // Check if game is complete
+                if (gameState.solvedCategories.length === gameData.categories.length) {
+                    gameComplete();
+                }
+            } else if (categoryAlreadySolved) {
+                // Already solved this category
+                feedbackElement.textContent = `You've already found the "${selectedCategories[0]}" category!`;
+                feedbackElement.style.color = "#ffc107";
+                
+                // Deselect items
+                selectedElements.forEach(el => {
+                    el.classList.remove('selected');
+                });
+            } else {
+                // Not a valid category
+                feedbackElement.textContent = "These items don't form a category. Try again!";
+                feedbackElement.style.color = "#dc3545";
+                
+                // Shake animation for feedback
+                selectedElements.forEach(el => {
+                    el.classList.add('shake');
+                    setTimeout(() => {
+                        el.classList.remove('shake');
+                    }, 500);
+                });
+            }
+            
+            // Reset selection state
+            gameState.selectedItems = [];
+            updateSubmitButton();
+        }
+
+        // Add a solved group to the display
+        function addSolvedGroup(category) {
+            const groupElement = document.createElement('div');
+            groupElement.className = 'group';
+            
+            const groupHeader = document.createElement('div');
+            groupHeader.className = 'group-header';
+            
+            const colorCircle = document.createElement('div');
+            colorCircle.className = `group-color ${category.color}`;
+            
+            const groupTitle = document.createElement('h3');
+            groupTitle.textContent = category.name;
+            
+            groupHeader.appendChild(colorCircle);
+            groupHeader.appendChild(groupTitle);
+            
+            const groupDescription = document.createElement('p');
+            groupDescription.textContent = category.description;
+            
+            const groupItems = document.createElement('div');
+            groupItems.className = 'group-items';
+            
+            category.items.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'group-item';
+                itemElement.innerHTML = `<strong>${item.text}</strong> - <span class="speaker-link">${item.speaker}</span>`;
+                groupItems.appendChild(itemElement);
+            });
+            
+            groupElement.appendChild(groupHeader);
+            groupElement.appendChild(groupDescription);
+            groupElement.appendChild(groupItems);
+            
+            solvedGroupsElement.appendChild(groupElement);
+        }
+
+        // Show a hint
+        function showHint() {
+            if (gameState.hintsUsed < gameState.maxHints) {
+                const hint = gameData.hints[gameState.hintsUsed];
+                hintContent.textContent = hint;
+                hintArea.classList.remove('hidden');
+                gameState.hintsUsed++;
+                
+                if (gameState.hintsUsed >= gameState.maxHints) {
+                    hintButton.disabled = true;
+                    hintButton.textContent = "No More Hints";
+                }
+            }
+        }
+
+        // Game complete
+        function gameComplete() {
+            completionMessage.classList.remove('hidden');
+            
+            // Scroll to completion message
+            setTimeout(() => {
+                completionMessage.scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
+        }
+
+        // Utility function to shuffle an array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Start the game when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
