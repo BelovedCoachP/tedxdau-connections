@@ -146,22 +146,32 @@ button:disabled { /* For both submitButton and hintButton when disabled */
     color: #666; /* Ensuring text is visible on light grey */
 }
 
-#hintButton { /* Specific styling for hintButton from hint styling.txt */
-    background-color: var(--tedx-dark); /* [cite: 31] */
-    color: white; /* Ensuring text is white on dark background */
-    padding: 14px 28px; /* Retained from previous for consistent button size */
-    font-size: 1.1rem; /* Retained from previous */
-    font-weight: bold; /* Retained from previous */
-    border-radius: 5px; /* Retained from previous */
-    border: none; /* Retained from previous */
-    cursor: pointer; /* Retained from previous */
-    transition: background-color 0.2s; /* Retained from previous */
+/* Replace your existing #hintButton and #hintButton:hover rules with these: */
+
+#hintButton {
+    background-color: var(--yellow-category); /* Gold color */
+    color: var(--tedx-dark); /* Dark text for better contrast on gold */
+    padding: 14px 28px;       /* Retaining previous padding */
+    font-size: 1.1rem;        /* Retaining previous font size */
+    font-weight: bold;        /* Retaining previous font weight */
+    border-radius: 5px;       /* Retaining previous border radius */
+    border: none;             /* Retaining previous border */
+    cursor: pointer;          /* Retaining previous cursor */
+    transition: background-color 0.2s; /* Retaining previous transition */
 }
 
-#hintButton:hover { /* Specific hover for hintButton from hint styling.txt */
-    background-color: #222; /* [cite: 32] */
+#hintButton:hover {
+    background-color: #e0c65f; /* A slightly darker gold for hover */
+    color: var(--tedx-dark);   /* Keep text dark on hover */
 }
-/* #hintButton:disabled will use the general button:disabled style above */
+
+/* Ensure your general button:disabled style is still present for when hints run out:
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
+}
+*/
 
 #feedback {
     text-align: center; /* [cite: 32] */
