@@ -1,0 +1,303 @@
+:root {
+    --tedx-red: #e62b1e; /* [cite: 1] */
+    --tedx-dark: #333333; /* [cite: 2] */
+    --yellow-category: #f9df6d; /* [cite: 2] */
+    --green-category: #a0c35a; /* [cite: 2] */
+    --blue-category: #718eff; /* [cite: 2] */
+    --purple-category: #b48ead; /* [cite: 2] */
+    --selected-bg: #e6e6e6; /* [cite: 2] */
+    --hover-bg: #f0f0f0; /* [cite: 2] */
+}
+
+* {
+    box-sizing: border-box; /* [cite: 3] */
+    margin: 0; /* [cite: 4] */
+    padding: 0; /* [cite: 4] */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* [cite: 4] */
+}
+
+body {
+    background-color: #000000; /* [cite: 4] */
+    color: #ffffff; /* [cite: 5] */
+    line-height: 1.6; /* [cite: 5] */
+    max-width: 1000px; /* [cite: 5] */
+    margin: 0 auto; /* [cite: 5] */
+    padding: 20px; /* [cite: 5] */
+}
+
+header {
+    text-align: center; /* [cite: 6] */
+    margin-bottom: 30px; /* [cite: 7] */
+    background-color: #000000; /* [cite: 7] */
+    padding: 20px; /* [cite: 7] */
+    border-radius: 10px; /* [cite: 7] */
+}
+
+.header-logo {
+    max-width: 100%; /* [cite: 7] */
+    height: auto; /* [cite: 8] */
+    margin-bottom: 20px; /* [cite: 8] */
+}
+
+header h1 {
+    color: var(--tedx-red); /* [cite: 8] */
+    font-size: 2.5rem; /* [cite: 9] */
+    margin-bottom: 10px; /* [cite: 9] */
+    display: none; /* Hide the text header since we're using the image */ /* [cite: 9] */
+}
+
+header h2 {
+    font-size: 1.5rem; /* [cite: 9] */
+    font-weight: normal; /* [cite: 10] */
+    margin-bottom: 20px; /* [cite: 10] */
+    color: #ffffff; /* [cite: 10] */
+}
+
+.instructions {
+    background-color: #333333; /* [cite: 10] */
+    color: #ffffff; /* [cite: 11] */
+    padding: 20px; /* [cite: 11] */
+    border-radius: 10px; /* [cite: 11] */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* [cite: 11] */
+    margin-bottom: 30px; /* [cite: 11] */
+}
+
+.instructions h3 {
+    margin-bottom: 10px; /* [cite: 12] */
+    color: var(--tedx-red); /* [cite: 13] */
+}
+
+.grid {
+    display: grid; /* [cite: 13] */
+    grid-template-columns: repeat(4, 1fr); /* [cite: 14] */
+    gap: 10px; /* [cite: 14] */
+    margin-bottom: 20px; /* [cite: 14] */
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* [cite: 14] */
+    }
+}
+
+.item {
+    background-color: #333333; /* [cite: 15] */
+    color: #ffffff; /* [cite: 16] */
+    padding: 15px; /* [cite: 16] */
+    border-radius: 8px; /* [cite: 16] */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* [cite: 16] */
+    text-align: center; /* [cite: 16] */
+    cursor: pointer; /* [cite: 16] */
+    transition: all 0.3s ease; /* [cite: 16] */
+    height: 120px; /* [cite: 17] */
+    display: flex; /* [cite: 17] */
+    align-items: center; /* [cite: 17] */
+    justify-content: center; /* [cite: 17] */
+    font-size: 0.9rem; /* [cite: 17] */
+}
+
+.item:hover {
+    background-color: #444444; /* [cite: 18] */
+    transform: translateY(-2px); /* [cite: 19] */
+}
+
+.item.selected {
+    background-color: #555555; /* [cite: 19] */
+    border: 2px solid #ffffff; /* [cite: 20] */
+    transform: scale(1.02); /* [cite: 20] */
+}
+
+.item.solved {
+    cursor: default; /* [cite: 20] */
+    transform: none; /* [cite: 21] */
+}
+
+.yellow-category {
+    background-color: var(--yellow-category); /* [cite: 21] */
+}
+
+.green-category {
+    background-color: var(--green-category); /* [cite: 22] */
+}
+
+.blue-category {
+    background-color: var(--blue-category); /* [cite: 23] */
+}
+
+.purple-category {
+    background-color: var(--purple-category); /* [cite: 24] */
+}
+
+.controls {
+    display: flex; /* [cite: 25] */
+    justify-content: center; /* [cite: 26] */
+    gap: 20px; /* [cite: 26] */
+    margin-bottom: 30px; /* [cite: 26] */
+}
+
+button {
+    background-color: var(--tedx-red); /* [cite: 26] */
+    color: white; /* [cite: 27] */
+    border: none; /* [cite: 27] */
+    padding: 12px 24px; /* [cite: 27] */
+    border-radius: 5px; /* [cite: 27] */
+    cursor: pointer; /* [cite: 27] */
+    font-size: 1rem; /* [cite: 27] */
+    font-weight: bold; /* [cite: 27] */
+    transition: background-color 0.2s; /* [cite: 28] */
+}
+
+button:hover {
+    background-color: #c71f13; /* [cite: 28] */
+}
+
+button:disabled {
+    background-color: #ccc; /* [cite: 29] */
+    cursor: not-allowed; /* [cite: 30] */
+    color: #666; /* Darker text for disabled grey button */ /* [cite: 162] */
+}
+
+#hintButton {
+    background-color: var(--tedx-red); /* [cite: 163] */
+    padding: 14px 28px; /* [cite: 163] */
+    font-size: 1.1rem; /* [cite: 163] */
+}
+
+#hintButton:hover {
+    background-color: #c71f13; /* [cite: 165] */
+}
+
+#hintButton:disabled {
+    background-color: var(--tedx-red); /* [cite: 166] */ /* Keep it TEDx red */
+    color: white; /* [cite: 167] */ /* Ensure text remains white */
+    opacity: 0.65; /* [cite: 168] */ /* Make it appear faded/disabled */
+    cursor: not-allowed; /* [cite: 169] */
+}
+
+#feedback {
+    text-align: center; /* [cite: 34] */
+    margin-bottom: 20px; /* [cite: 35] */
+    min-height: 50px; /* [cite: 35] */
+    font-size: 1.2rem; /* [cite: 35] */
+    font-weight: bold; /* [cite: 35] */
+}
+
+.hidden {
+    display: none; /* [cite: 35] */
+}
+
+.solved-groups {
+    margin-top: 30px; /* [cite: 36] */
+}
+
+.group {
+    background-color: white; /* [cite: 37] */
+    border-radius: 8px; /* [cite: 38] */
+    padding: 20px; /* [cite: 38] */
+    margin-bottom: 20px; /* [cite: 38] */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* [cite: 39] */
+}
+
+.group-header {
+    margin-bottom: 15px; /* [cite: 39] */
+    display: flex; /* [cite: 40] */
+    align-items: center; /* [cite: 40] */
+}
+
+.group-color {
+    width: 20px; /* [cite: 40] */
+    height: 20px; /* [cite: 41] */
+    border-radius: 50%; /* [cite: 41] */
+    margin-right: 10px; /* [cite: 41] */
+}
+
+.group-items {
+    display: grid; /* [cite: 41] */
+    grid-template-columns: repeat(2, 1fr); /* [cite: 42] */
+    gap: 10px; /* [cite: 42] */
+}
+
+@media (max-width: 768px) {
+    .group-items {
+        grid-template-columns: 1fr; /* [cite: 43] */
+    }
+}
+
+.group-item {
+    background-color: #f9f9f9; /* [cite: 43] */
+    padding: 10px; /* [cite: 44] */
+    border-radius: 5px; /* [cite: 44] */
+}
+
+.completion-message {
+    background-color: white; /* [cite: 44] */
+    border-radius: 10px; /* [cite: 45] */
+    padding: 30px; /* [cite: 45] */
+    text-align: center; /* [cite: 45] */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* [cite: 45] */
+    margin-top: 30px; /* [cite: 45] */
+}
+
+.completion-message h2 {
+    color: var(--tedx-red); /* [cite: 46] */
+    margin-bottom: 20px; /* [cite: 47] */
+}
+
+.completion-message p {
+    margin-bottom: 20px; /* [cite: 48] */
+}
+
+.btn-register {
+    display: inline-block; /* [cite: 48] */
+    background-color: var(--tedx-red); /* [cite: 49] */
+    color: white; /* [cite: 49] */
+    padding: 15px 30px; /* [cite: 49] */
+    border-radius: 5px; /* [cite: 49] */
+    text-decoration: none; /* [cite: 49] */
+    font-weight: bold; /* [cite: 50] */
+    margin-top: 20px; /* [cite: 50] */
+    transition: background-color 0.2s; /* [cite: 50] */
+}
+
+.btn-register:hover {
+    background-color: #c71f13; /* [cite: 51] */
+}
+
+.speaker-link {
+    color: var(--tedx-red); /* [cite: 51] */
+    text-decoration: none; /* [cite: 52] */
+    font-weight: bold; /* [cite: 52] */
+}
+
+.speaker-link:hover {
+    text-decoration: underline; /* [cite: 53] */
+}
+
+.hint-box {
+    background-color: #fff3cd; /* [cite: 53] */
+    border: 1px solid #ffeeba; /* [cite: 54] */
+    padding: 15px; /* [cite: 54] */
+    border-radius: 5px; /* [cite: 54] */
+    margin-bottom: 20px; /* [cite: 55] */
+}
+
+.hint-box h4 {
+    color: #856404; /* [cite: 55] */
+    margin-bottom: 10px; /* [cite: 56] */
+}
+
+.hint-content {
+    font-style: italic; /* [cite: 57] */
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
