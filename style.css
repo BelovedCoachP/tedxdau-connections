@@ -112,21 +112,10 @@ header h2 {
     transform: none; /* [cite: 21] */
 }
 
-.yellow-category {
-    background-color: var(--yellow-category); /* [cite: 21] */
-}
-
-.green-category {
-    background-color: var(--green-category); /* [cite: 22] */
-}
-
-.blue-category {
-    background-color: var(--blue-category); /* [cite: 23] */
-}
-
-.purple-category {
-    background-color: var(--purple-category); /* [cite: 24] */
-}
+.yellow-category { background-color: var(--yellow-category); /* [cite: 21] */ }
+.green-category { background-color: var(--green-category); /* [cite: 22] */ }
+.blue-category { background-color: var(--blue-category); /* [cite: 23] */ }
+.purple-category { background-color: var(--purple-category); /* [cite: 24] */ }
 
 .controls {
     display: flex; /* [cite: 25] */
@@ -135,7 +124,7 @@ header h2 {
     margin-bottom: 30px; /* [cite: 26] */
 }
 
-button {
+button { /* submitButton will use this primarily */
     background-color: var(--tedx-red); /* [cite: 26] */
     color: white; /* [cite: 27] */
     border: none; /* [cite: 27] */
@@ -144,156 +133,136 @@ button {
     cursor: pointer; /* [cite: 27] */
     font-size: 1rem; /* [cite: 27] */
     font-weight: bold; /* [cite: 27] */
-    transition: background-color 0.2s; /* [cite: 28] */
+    transition: background-color 0.2s; /* [cite: 27] */
 }
 
-button:hover {
+button:hover { /* submitButton hover */
     background-color: #c71f13; /* [cite: 28] */
 }
 
-button:disabled {
+button:disabled { /* For both submitButton and hintButton when disabled */
     background-color: #ccc; /* [cite: 29] */
     cursor: not-allowed; /* [cite: 30] */
-    color: #666; /* Darker text for disabled grey button */ /* [cite: 162] */
+    color: #666; /* Ensuring text is visible on light grey */
 }
 
-#hintButton {
-    background-color: var(--tedx-red); /* [cite: 163] */
-    padding: 14px 28px; /* [cite: 163] */
-    font-size: 1.1rem; /* [cite: 163] */
+#hintButton { /* Specific styling for hintButton from hint styling.txt */
+    background-color: var(--tedx-dark); /* [cite: 31] */
+    color: white; /* Ensuring text is white on dark background */
+    padding: 14px 28px; /* Retained from previous for consistent button size */
+    font-size: 1.1rem; /* Retained from previous */
+    font-weight: bold; /* Retained from previous */
+    border-radius: 5px; /* Retained from previous */
+    border: none; /* Retained from previous */
+    cursor: pointer; /* Retained from previous */
+    transition: background-color 0.2s; /* Retained from previous */
 }
 
-#hintButton:hover {
-    background-color: #c71f13; /* [cite: 165] */
+#hintButton:hover { /* Specific hover for hintButton from hint styling.txt */
+    background-color: #222; /* [cite: 32] */
 }
-
-#hintButton:disabled {
-    background-color: var(--tedx-red); /* [cite: 166] */ /* Keep it TEDx red */
-    color: white; /* [cite: 167] */ /* Ensure text remains white */
-    opacity: 0.65; /* [cite: 168] */ /* Make it appear faded/disabled */
-    cursor: not-allowed; /* [cite: 169] */
-}
+/* #hintButton:disabled will use the general button:disabled style above */
 
 #feedback {
-    text-align: center; /* [cite: 34] */
-    margin-bottom: 20px; /* [cite: 35] */
-    min-height: 50px; /* [cite: 35] */
-    font-size: 1.2rem; /* [cite: 35] */
-    font-weight: bold; /* [cite: 35] */
+    text-align: center; /* [cite: 32] */
+    margin-bottom: 20px; /* [cite: 33] */
+    min-height: 50px; /* [cite: 33] */
+    font-size: 1.2rem; /* [cite: 33] */
+    font-weight: bold; /* [cite: 33] */
 }
 
 .hidden {
-    display: none; /* [cite: 35] */
+    display: none; /* [cite: 33] */
 }
 
-.solved-groups {
-    margin-top: 30px; /* [cite: 36] */
-}
-
+.solved-groups { margin-top: 30px; /* [cite: 34] */ }
 .group {
-    background-color: white; /* [cite: 37] */
-    border-radius: 8px; /* [cite: 38] */
-    padding: 20px; /* [cite: 38] */
-    margin-bottom: 20px; /* [cite: 38] */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* [cite: 39] */
+    background-color: white; /* [cite: 35] */
+    border-radius: 8px; /* [cite: 36] */
+    padding: 20px; /* [cite: 36] */
+    margin-bottom: 20px; /* [cite: 36] */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* [cite: 36] */
 }
-
 .group-header {
-    margin-bottom: 15px; /* [cite: 39] */
-    display: flex; /* [cite: 40] */
-    align-items: center; /* [cite: 40] */
+    margin-bottom: 15px; /* [cite: 37] */
+    display: flex; /* [cite: 38] */
+    align-items: center; /* [cite: 38] */
 }
-
 .group-color {
-    width: 20px; /* [cite: 40] */
-    height: 20px; /* [cite: 41] */
-    border-radius: 50%; /* [cite: 41] */
-    margin-right: 10px; /* [cite: 41] */
+    width: 20px; /* [cite: 38] */
+    height: 20px; /* [cite: 39] */
+    border-radius: 50%; /* [cite: 39] */
+    margin-right: 10px; /* [cite: 39] */
 }
-
 .group-items {
-    display: grid; /* [cite: 41] */
-    grid-template-columns: repeat(2, 1fr); /* [cite: 42] */
-    gap: 10px; /* [cite: 42] */
+    display: grid; /* [cite: 39] */
+    grid-template-columns: repeat(2, 1fr); /* [cite: 40] */
+    gap: 10px; /* [cite: 40] */
 }
-
 @media (max-width: 768px) {
-    .group-items {
-        grid-template-columns: 1fr; /* [cite: 43] */
-    }
+    .group-items { grid-template-columns: 1fr; /* [cite: 40] */ }
 }
-
 .group-item {
-    background-color: #f9f9f9; /* [cite: 43] */
-    padding: 10px; /* [cite: 44] */
-    border-radius: 5px; /* [cite: 44] */
+    background-color: #f9f9f9; /* [cite: 41] */
+    padding: 10px; /* [cite: 42] */
+    border-radius: 5px; /* [cite: 42] */
 }
 
 .completion-message {
-    background-color: white; /* [cite: 44] */
-    border-radius: 10px; /* [cite: 45] */
-    padding: 30px; /* [cite: 45] */
-    text-align: center; /* [cite: 45] */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* [cite: 45] */
-    margin-top: 30px; /* [cite: 45] */
+    background-color: white; /* [cite: 42] */
+    border-radius: 10px; /* [cite: 43] */
+    padding: 30px; /* [cite: 43] */
+    text-align: center; /* [cite: 43] */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* [cite: 43] */
+    margin-top: 30px; /* [cite: 43] */
 }
-
 .completion-message h2 {
-    color: var(--tedx-red); /* [cite: 46] */
-    margin-bottom: 20px; /* [cite: 47] */
+    color: var(--tedx-red); /* [cite: 44] */
+    margin-bottom: 20px; /* [cite: 45] */
 }
-
-.completion-message p {
-    margin-bottom: 20px; /* [cite: 48] */
-}
-
+.completion-message p { margin-bottom: 20px; /* [cite: 45] */ }
 .btn-register {
-    display: inline-block; /* [cite: 48] */
-    background-color: var(--tedx-red); /* [cite: 49] */
-    color: white; /* [cite: 49] */
-    padding: 15px 30px; /* [cite: 49] */
-    border-radius: 5px; /* [cite: 49] */
-    text-decoration: none; /* [cite: 49] */
-    font-weight: bold; /* [cite: 50] */
-    margin-top: 20px; /* [cite: 50] */
-    transition: background-color 0.2s; /* [cite: 50] */
+    display: inline-block; /* [cite: 46] */
+    background-color: var(--tedx-red); /* [cite: 47] */
+    color: white; /* [cite: 47] */
+    padding: 15px 30px; /* [cite: 47] */
+    border-radius: 5px; /* [cite: 47] */
+    text-decoration: none; /* [cite: 47] */
+    font-weight: bold; /* [cite: 47] */
+    margin-top: 20px; /* [cite: 47] */
+    transition: background-color 0.2s; /* [cite: 47] */
 }
-
-.btn-register:hover {
-    background-color: #c71f13; /* [cite: 51] */
-}
-
+.btn-register:hover { background-color: #c71f13; /* [cite: 48] */ }
 .speaker-link {
-    color: var(--tedx-red); /* [cite: 51] */
-    text-decoration: none; /* [cite: 52] */
-    font-weight: bold; /* [cite: 52] */
+    color: var(--tedx-red); /* [cite: 49] */
+    text-decoration: none; /* [cite: 50] */
+    font-weight: bold; /* [cite: 50] */
 }
+.speaker-link:hover { text-decoration: underline; /* [cite: 50] */ }
 
-.speaker-link:hover {
-    text-decoration: underline; /* [cite: 53] */
-}
-
+/* Crucial Hint Box Styling from hint styling.txt */
 .hint-box {
-    background-color: #fff3cd; /* [cite: 53] */
-    border: 1px solid #ffeeba; /* [cite: 54] */
-    padding: 15px; /* [cite: 54] */
-    border-radius: 5px; /* [cite: 54] */
-    margin-bottom: 20px; /* [cite: 55] */
+    background-color: #333333; /* [cite: 52] */
+    border: 1px solid #555555; /* [cite: 52] */
+    color: #ffffff; /* ENSURES TEXT IS VISIBLE ON DARK BG */ /* [cite: 52] */
+    padding: 15px; /* [cite: 52] */
+    border-radius: 5px; /* [cite: 52] */
+    margin-bottom: 20px; /* [cite: 52] */
 }
 
 .hint-box h4 {
-    color: #856404; /* [cite: 55] */
-    margin-bottom: 10px; /* [cite: 56] */
+    color: #ffc107; /* [cite: 54] */
+    margin-bottom: 10px; /* [cite: 54] */
 }
 
 .hint-content {
-    font-style: italic; /* [cite: 57] */
+    font-style: italic; /* [cite: 55] */
+    color: #ffffff; /* ENSURES TEXT IS VISIBLE ON DARK BG */ /* [cite: 55] */
 }
 
 .shake {
     animation: shake 0.5s;
 }
-
 @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
